@@ -66,7 +66,7 @@ private:
 
 	// an attempt to increase efficiency by eliminating the need to calculate 
 	// the indices of the 6 neighbors every time needed.
-	// It stores a list of nearest neighbors for each cell.
+	// It stores a list of nearest neighbors for each site.
 	vector< array<int, 6> > nbr_table;
 
 public:
