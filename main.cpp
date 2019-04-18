@@ -41,8 +41,7 @@ class square_lattice
 private:
     const int side_length;  /* number of lattice sites on each side of
                                                          the square */
-    const int replica_count;    /* the value of N in "\exp{-\beta H} = 
-                                                             (\exp(-\beta \delta H)) ^ N" */
+    const int replica_count;    /* Divisions of 'time' dimensions */
     double beta; // inverse temperature
     double mag_field;
 
