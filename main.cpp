@@ -17,24 +17,24 @@ using std::log;
 using std::abs;
 
 
-// for random number generator
+// for the random number generator
 #define FIXED_SEED 139933
 
-struct coordinates
+
+// Will probably eliminate this struct later
+struct coord_type
 {
     int x, y, t;
 
-    coordinates(int x_p, int y_p, int t_p) 
+    coord_type(int x_p, int y_p, int t_p) 
         : x(x_p), y(y_p), t(t_p)
-    {
-    }
+    { }
 
-    friend std::ostream& operator<< (std::ostream& out, const coordinates& c)
+    friend std::ostream& operator<< (std::ostream& out, const coord_type& c)
     {
         return out << "(" << c.x << ", " << c.y << ", " << c.t << ")";
     }
 };
-
 
 class square_lattice
 {
@@ -48,10 +48,7 @@ private:
     double Gamma,   // = \eta / \delta
            delta; // = \beta / N
 
-
-
     vector<int> config; 
-
 
 private:
     std::mt19937 rand_gen;
@@ -90,7 +87,7 @@ public:
             for (int i_y = 0; i_y < side_length; ++i_y) { 
                 for (int i_t = 0; i_t < replica_count; ++i_t) {
 
-                    int index = coord_to_index( coordinates(i_x, i_y, i_t) );
+                    int index = coord_to_index( coord_type(i_x, i_y, i_t) );
 
                     auto relative_index = [&, this] (int dx, int dy, int dt) {
                         int j_x = i_x + dx;
@@ -105,7 +102,7 @@ public:
                         j_y %= side_length;
                         j_t %= replica_count;
 
-                        return coord_to_index( coordinates(j_x, j_y, j_t) );
+                        return coord_to_index( coord_type(j_x, j_y, j_t) );
                     };
 
                     nbr_table[index][0] = relative_index(+1, 0, 0);
@@ -239,7 +236,7 @@ public:
     }
 
 
-    int coord_to_index(const coordinates& c)
+    int coord_to_index(const coord_type& c)
     {
         return 
             c.x + 
@@ -247,14 +244,14 @@ public:
             c.t * side_length * side_length;
     }
 
-    coordinates index_to_coord(const int i)
+    coord_type index_to_coord(const int i)
     {
         int x, y, t;
         x = i % side_length;
         y = ((i - x) / side_length) % side_length;
         t = i / (side_length * side_length);
 
-        return coordinates(x, y, t);
+        return coord_type(x, y, t);
     }
 
 };
