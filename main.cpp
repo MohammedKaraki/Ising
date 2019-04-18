@@ -40,13 +40,13 @@ class square_lattice
 {
 private:
     const int side_length;  /* number of lattice sites on each side of
-                                                         the square */
-    const int replica_count;    /* Divisions of 'time' dimensions */
+                               the square */
+    const int replica_count;    /* Divisions of 'time' dimension */
     double beta; // inverse temperature
     double mag_field;
 
     double Gamma,   // = \eta / \delta
-                 delta; // = \beta / N
+           delta; // = \beta / N
 
 
 
@@ -55,12 +55,12 @@ private:
 
 private:
     std::mt19937 rand_gen;
-    std::uniform_int_distribution<> bin_dist; /* 0 or 1 (to initialize 'config'
-                                                                                             randomly) */
+    std::uniform_int_distribution<> bin_dist; /* 0 or 1 (to initialize 
+                                                 'config' randomly) */
     std::uniform_int_distribution<> site_dist; /* 0, 1, ..., site_count-1
-                                                                                                (to sample one site) */
+                                                  (to sample one site) */
     std::uniform_real_distribution<> prob_dist; /* Sampling from [0., 1.] 
-                                                                                                 to make probabilistic decisions */
+                                       to make probabilistic decisions */
 
 
     // an attempt to increase efficiency by eliminating the need to calculate 
@@ -153,8 +153,8 @@ public:
 
 
         vector<bool> on_cluster; /* using which, it takes O(1) to check
-                                                                if a given site belongs to the cluster; no
-                                                                need to do a search every time. */
+                                    if a given site belongs to the cluster; no
+                                    need to do a search every time. */
         on_cluster.resize(site_count);
         for (auto it = on_cluster.begin(); it != on_cluster.end(); ++it) {
             *it = false;
